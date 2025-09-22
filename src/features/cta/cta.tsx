@@ -1,43 +1,13 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { motion } from 'motion/react';
 import Link from 'next/link';
-import { useState } from 'react';
-import { sendToTelegram } from '@/actions/telegram';
 import { Input } from '@/components/ui/input';
 
 export const CTA = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    message: '',
-  });
-  const [isSending, setIsSending] = useState(false);
-  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSending(true);
-    setStatus('idle');
-
-    try {
-      await sendToTelegram(formData);
-      setStatus('success');
-      setFormData({ name: '', phone: '', email: '', message: '' });
-      window.location.href = 'https://t.me/your_telegram_username';
-    } catch (error) {
-      setStatus('error');
-      console.error('Xabar yuborishda xatolik:', error);
-    } finally {
-      setIsSending(false);
-    }
-  };
-
   return (
     <section className="py-16 px-4 bg-primary text-primary-foreground" id="contact">
       <div className="container mx-auto">
@@ -62,75 +32,45 @@ export const CTA = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="bg-card/10 backdrop-blur-lg rounded-2xl p-8 shadow-lg">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <Label className="block text-sm font-medium mb-2">Ism</Label>
-                  <Input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full"
-                    placeholder="Ismingizni kiriting"
-                    required
-                  />
-                </div>
-                <div>
-                  <Label className="block text-sm font-medium mb-2">Telefon</Label>
-                  <Input
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full"
-                    placeholder="+998"
-                    required
-                  />
-                </div>
+            className="p-6 rounded-lg shadow-lg bg-card text-card-foreground">
+            <form className="space-y-4">
+              <div>
+                <Label htmlFor="name" className="block text-lg font-medium text-foreground">
+                  Ismingiz
+                </Label>
+                <Input
+                  type="text"
+                  id="name"
+                  className="mt-1 block w-full p-3 border border-border rounded-md bg-background text-foreground"
+                  placeholder="Ismingizni kiriting"
+                />
               </div>
               <div>
-                <Label className="block text-sm font-medium mb-2">Email</Label>
+                <Label htmlFor="email" className="block text-lg font-medium text-foreground">
+                  Emailingiz
+                </Label>
                 <Input
                   type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full "
-                  placeholder="example@mail.com"
-                  required
+                  id="email"
+                  className="mt-1 block w-full p-3 border border-border rounded-md bg-background text-foreground"
+                  placeholder="Emailingizni kiriting"
                 />
               </div>
               <div>
-                <Label className="block text-sm font-medium mb-2">Xabar</Label>
+                <Label htmlFor="message" className="block text-lg font-medium text-foreground">
+                  Xabar
+                </Label>
                 <Textarea
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full min-h-[120px]"
-                  placeholder="Xabaringizni yozing..."
-                  required
-                />
+                  id="message"
+                  rows={5}
+                  className="mt-1 block w-full p-3 border border-border rounded-md bg-background text-foreground"
+                  placeholder="Xabaringizni yozing"></Textarea>
               </div>
-              {status === 'success' && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="bg-secondary/20 p-4 rounded-lg text-center">
-                  <p>Xabaringiz qabul qilindi! Telegram ga yo'naltirilmoqdasiz...</p>
-                </motion.div>
-              )}
-              {status === 'error' && (
-                <div className="bg-destructive/20 p-4 rounded-lg">
-                  Xabar yuborishda xatolik yuz berdi. Iltimos, qayta urinib ko'ring.
-                </div>
-              )}
-              <div className="text-center">
-                <Button
-                  type="submit"
-                  size="lg"
-                  disabled={isSending}
-                  className="w-full md:w-auto text-lg font-semibold px-8 py-6">
-                  {isSending ? 'Yuborilmoqda...' : 'Yuborish'}
-                </Button>
-              </div>
+              <Button
+                type="submit"
+                className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-md text-xl font-semibold hover:opacity-90 transition-opacity duration-300">
+                Yuborish
+              </Button>
             </form>
           </motion.div>
 

@@ -25,7 +25,7 @@ export default function Header() {
 
   return (
     <header className="border-b px-4 md:px-6">
-      <div className="container mx-auto flex h-16 justify-between gap-4 p-4">
+      <div className="container mx-auto flex h-16 justify-between gap-4">
         {/* Left side */}
         <div className="flex gap-2">
           <div className="flex items-center md:hidden">
@@ -102,7 +102,9 @@ export default function Header() {
         {/* Right side */}
         <div className="flex flex-1 items-center justify-end gap-2">
           <Button asChild size="sm" className="text-sm">
-            <Link href="#">Bog'lanish</Link>
+            <Link href="https://t.me/ziyaev_d" target="_blank" rel="noopener noreferrer">
+              Bog'lanish
+            </Link>
           </Button>
           <AnimatedThemeToggler />
         </div>

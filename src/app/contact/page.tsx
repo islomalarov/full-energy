@@ -1,4 +1,7 @@
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 
 export default function ContactPage() {
   return (
@@ -33,10 +36,10 @@ export default function ContactPage() {
           <h2 className="text-3xl font-semibold mb-4">Bizga Xabar Yuboring</h2>
           <form className="space-y-4">
             <div>
-              <label htmlFor="name" className="block text-lg font-medium text-foreground">
+              <Label htmlFor="name" className="block text-lg font-medium text-foreground">
                 Ismingiz
-              </label>
-              <input
+              </Label>
+              <Input
                 type="text"
                 id="name"
                 className="mt-1 block w-full p-3 border border-border rounded-md bg-background text-foreground"
@@ -44,10 +47,10 @@ export default function ContactPage() {
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-lg font-medium text-foreground">
+              <Label htmlFor="email" className="block text-lg font-medium text-foreground">
                 Emailingiz
-              </label>
-              <input
+              </Label>
+              <Input
                 type="email"
                 id="email"
                 className="mt-1 block w-full p-3 border border-border rounded-md bg-background text-foreground"
@@ -55,14 +58,14 @@ export default function ContactPage() {
               />
             </div>
             <div>
-              <label htmlFor="message" className="block text-lg font-medium text-foreground">
+              <Label htmlFor="message" className="block text-lg font-medium text-foreground">
                 Xabar
-              </label>
-              <textarea
+              </Label>
+              <Textarea
                 id="message"
                 rows={5}
                 className="mt-1 block w-full p-3 border border-border rounded-md bg-background text-foreground"
-                placeholder="Xabaringizni yozing"></textarea>
+                placeholder="Xabaringizni yozing"></Textarea>
             </div>
             <Button
               type="submit"
