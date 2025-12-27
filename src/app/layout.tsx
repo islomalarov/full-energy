@@ -6,6 +6,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { TestBanner } from '@/components/ui/test-banner';
 import Header from '@/components/layout/Header';
 import { ScrollProgress } from '@/components/ui/scroll-progress';
+import { Analytics } from '@vercel/analytics/next';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -41,6 +42,7 @@ export default function RootLayout({
           <main className="min-h-screen flex flex-col">{children}</main>
           <Footer />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
